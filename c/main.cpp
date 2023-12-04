@@ -10,16 +10,16 @@ bool NAND(string circuit);
 bool NOR(string circuit);
 bool XOR(string circuit);
 bool evaluate_logic_gate(string &circuit);
+map<string, function<bool(string&)>> funcMap =
+    {{ "AND", AND},
+    { "OR", OR},
+    {"NOT", NOT},
+    { "NAND", NAND},
+    { "NOR", NOR},
+    { "XOR", XOR}
+         };
 int main()
 {
-    map<string, function<bool(string&)>> funcMap =
-        {{ "AND", AND},
-        { "OR", OR},
-        {"NOT", NOT},
-        { "NAND", NAND},
-        { "NOR", NOR},
-        { "XOR", XOR}
-             };
     string circuit;
     cout << "Enter the logic circuit: ";
     getline(cin, circuit);
@@ -31,7 +31,15 @@ int main()
 
 }
 bool evaluate_logic_gate(string &circuit){
-    return 1;
+    if (circuit.find(' ') == 1){
+        bool value = stoi(circuit.substr(0,1));
+        circuit = circuit.substr(2,circuit.length());
+        return value;
+    }
+    string sub_gate = circuit.substr(0, circuit.find(' '));
+    string input = circuit.substr(circuit.find(' ')+1, circuit.find('E'));
+    circuit = circuit.substr(circuit.find('E')+1, circuit.length());
+    return funcMap[sub_gate](input);
 }
 bool AND(string &circuit)
 {
