@@ -43,39 +43,39 @@ bool AND(string &circuit)
 
 bool OR(string &circuit)
 {
-    bool input1; //TODO: Input subcircuit 1
-    bool input2; //TODO: Input Subcircuit 2
+    bool input1 = evaluate_logic_gate(circuit);
+    bool input2 = evaluate_logic_gate(circuit);
 
     return (input1 || input2);
 }
 
 bool NOT(string &circuit)
 {
-    bool input1; //TODO: Input subcircuit 1
+    bool input1 = evaluate_logic_gate(circuit);
 
     return (!(input1));
 }
 
 bool NAND(string &circuit)
 {
-    bool input1; //TODO: Input subcircuit 1
-    bool input2; //TODO: Input Subcircuit 2
+    bool input1 = evaluate_logic_gate(circuit);
+    bool input2 = evaluate_logic_gate(circuit);
 
     return (!(input1 && input2));
 }
 
 bool NOR(string &circuit)
 {
-    bool input1; //TODO: Input subcircuit 1
-    bool input2; //TODO: Input Subcircuit 2
+    bool input1 = evaluate_logic_gate(circuit);
+    bool input2 = evaluate_logic_gate(circuit);
 
     return (!(input1 || input2));
 }
 
 bool XOR(string &circuit)
 {
-    bool input1; //TODO: Input subcircuit 1
-    bool input2; //TODO: Input Subcircuit 2
+    bool input1 = evaluate_logic_gate(circuit);
+    bool input2 = evaluate_logic_gate(circuit);
 
     return ((input1 != input2));
 }
