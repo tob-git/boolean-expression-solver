@@ -65,14 +65,7 @@ bool XOR(string &circuit)
     return ((input1 != input2));
 }
 
-map < string, function < bool(string&) >> funcMap =
-    {{ "AND", AND},
-    { "OR", OR},
-    {"NOT", NOT},
-    { "NAND", NAND},
-    { "NOR", NOR},
-    { "XOR", XOR}
-         };
+
 bool evaluate_logic_gate(string &circuit){
     if (circuit.find(' ') == 1){
         bool value = stoi(circuit.substr(0,1));
@@ -80,11 +73,24 @@ bool evaluate_logic_gate(string &circuit){
         return value;
     }
     string sub_gate = circuit.substr(0, circuit.find(' '));
-    string input = circuit.substr(circuit.find(' ')+1, circuit.find('E'));
-    circuit = circuit.substr(circuit.find('E')+1, circuit.length());
-    return funcMap[sub_gate](input);
+    string input = circuit.substr(circuit.find(' ')+1, circuit.find('E')-2);
+    circuit = circuit.substr(circuit.find('E')+2, circuit.length());
+    if (sub_gate == "AND")
+        return AND(input);
+    if (sub_gate == "OR")
+        return OR(input);
+    if (sub_gate == "XOR")
+        return XOR(input);
+    if (sub_gate == "NOT")
+        return NOT(input);
+    if (sub_gate == "NOR")
+        return NOR(input);
+    if (sub_gate == "NAND")
+        return NAND(input);
+    return -1;
     
 }
+
 int main()
 {
     int output = 0;
@@ -94,10 +100,18 @@ int main()
     int spos = circuit.find(' ');
     string parent_gate = circuit.substr(0, spos);
     circuit = circuit.substr(spos+1, circuit.length());
-    if(funcMap[parent_gate](circuit)){
-        output = 1;
-        
-    }
+    if (parent_gate == "AND")
+        output =  AND(circuit);
+    if (parent_gate == "OR")
+        output = OR(circuit);
+    if (parent_gate == "XOR")
+        output = XOR(circuit);
+    if (parent_gate == "NOT")
+        output = NOT(circuit);
+    if (parent_gate == "NOR")
+        output = NOR(circuit);
+    if (parent_gate == "NAND")
+        output = NAND(circuit);
     
     cout << "AND gates : " << ands << "\n";
     cout << "OR gates : " << ors << "\n";
